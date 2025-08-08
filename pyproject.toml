@@ -55,9 +55,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/your-username/quantum-starter-lab" # IMPORTANT: Update with your repo URL
-Repository = "https://github.com/your-username/quantum-starter-lab"
-"Bug Tracker" = "https://github.com/your-username/quantum-starter-lab/issues"
+Homepage = "https://github.com/Pranava-Kumar/quantum-starter-lab" # IMPORTANT: Update with your repo URL
+Repository = "https://github.com/Pranava-Kumar/quantum-starter-lab"
+"Bug Tracker" = "https://github.com/Pranava-Kumar/quantum-starter-lab/issues"
 
 # This section creates the 'qsl' command-line tool. It will now work correctly.
 [project.scripts]
