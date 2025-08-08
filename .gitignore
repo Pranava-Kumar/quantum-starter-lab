@@ -1,0 +1,39 @@
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.python-version
+*.egg-info/
+.env
+.venv/
+env/
+venv/
+
+# Build and distribution
+/dist/
+/build/
+*.egg
+
+# Test and coverage reports
+.pytest_cache/
+.coverage
+htmlcov/
+pytest-report.html
+
+# IDE and editor specific files
+.vscode/
+.idea/
+.trae/
+*.swp
+*.swo
+
+# uv cache
+.uv_cache/
+
+# MkDocs documentation site
+/site/
+
+# OS-specific files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software in your work, please cite it as below."
+authors:
+  - family-names: "I"
+    given-names: "Pranava Kumar"
+    email: "pranavakumar.it@gmail.com"
+    orcid: "https://orcid.org/0000-0000-0000-0000" # Optional: Replace with your ORCID if you have one
+title: "quantum-starter-lab"
+version: 0.1.0 # Update this as you release new versions
+date-released: 2025-08-09
+abstract: "A single, beginner-friendly Python layer that wraps the most common introductory quantum tasks—algorithms, noise intuition, visualization, and cross-framework portability—so that newcomers can learn and build quickly, while educators can run consistent lessons anywhere."
+keywords:
+  - quantum computing
+  - qiskit
+  - cirq
+  - education
+  - quantum algorithms
+  - noise simulation
+license: Apache-2.0
+repository-code: "https://github.com/Pranava-Kumar/quantum-starter-lab" # IMPORTANT: Update with your GitHub repo URL

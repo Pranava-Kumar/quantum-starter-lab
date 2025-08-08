@@ -1,0 +1,47 @@
+# Main configuration for the MkDocs documentation site.
+
+site_name: quantum-starter-lab
+site_author: Pranava Kumar
+site_description: 'A beginner-friendly Python package for learning quantum computing fundamentals.'
+
+# Link to your GitHub repository (update this once you create it)
+repo_url: https://github.com/your-username/quantum-starter-lab
+repo_name: your-username/quantum-starter-lab
+
+# Theme configuration
+theme:
+  name: material
+  palette:
+    # Light mode
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.top
+    - search.suggest
+    - search.highlight
+
+# Copyright notice at the bottom of the page
+copyright: 'Copyright &copy; 2025 Pranava Kumar'
+
+# Navigation structure (this creates the sidebar)
+nav:
+  - 'Home': 'index.md'
+  - 'Quickstart Guide': 'quickstart.md'
+  - 'Tutorials':
+    - "Bell State": 'tutorials/bell.md'
+    - "DJ & BV": 'tutorials/dj_bv.md'
+    - "Grover's Search": 'tutorials/grover.md'
+    - "Teleportation": 'tutorials/teleportation.md'
+  - 'API Reference': 'api.md'

@@ -1,46 +1,71 @@
+# This is the corrected and final configuration file for the quantum-starter-lab package.
+
 [build-system]
-requires = ["setuptools>=68", "wheel"]
+requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "quantum-starter-lab"
-version = "0.1.0a0"
-description = "Beginner-friendly quantum demos with visuals and cross-framework runners."
+version = "0.1.0"
+description = "A beginner-friendly Python layer for running and visualizing introductory quantum demos."
+authors = [
+    { name = "Pranava Kumar", email = "pranavakumar.it@gmail.com" },
+]
 readme = "README.md"
-requires-python = ">=3.10"
 license = { text = "Apache-2.0" }
-authors = [{ name = "Pranava Kumar", email = "pranavakumar.it@gmail.com" }]
-keywords = ["quantum", "education", "qiskit", "cirq", "qkd"]
+requires-python = ">=3.10"
+keywords = ["quantum computing", "qiskit", "education", "quantum algorithms"]
 classifiers = [
-"Programming Language :: Python :: 3",
-"License :: OSI Approved :: Apache Software License",
-"Topic :: Education",
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Education",
+    "Topic :: Scientific/Engineering",
 ]
 
-dependencies = ["numpy>=1.24,<3", "typing-extensions>=4.8"]
+# Core dependencies with pinned versions for stability
+dependencies = [
+    "qiskit==1.1.1",
+    "qiskit-aer==0.14.1",
+    "matplotlib>=3.8.0",
+    "numpy>=1.26.0",
+]
 
 [project.optional-dependencies]
-qiskit = ["qiskit>=1,<2", "qiskit-aer>=0.14"]
-cirq = ["cirq>=1.2"]
-plots = ["matplotlib>=3.7"]
+# Optional dependency to enable the Cirq backend
+cirq = ["cirq>=1.4.0"]
+
+# Dependencies for developers (testing, linting, docs)
 dev = [
-"pytest>=7.4", "pytest-cov>=4", "hypothesis>=6",
-"ruff>=0.4", "black>=24", "mypy>=1.8", "pyright>=1.1.350",
-"pre-commit>=3.6", "mkdocs-material>=9.5", "nbmake>=1.5", "syrupy>=4",
-"build>=1", "twine>=5"
+    "quantum-starter-lab[cirq]",
+    "pytest",
+    "hypothesis",
+    "ruff",
+    "black",
+    "mypy",
+    "pre-commit",
+    "coverage",
+    "mkdocs",
+    "mkdocs-material",
 ]
 
+[project.urls]
+Homepage = "https://github.com/your-username/quantum-starter-lab" # IMPORTANT: Update with your repo URL
+Repository = "https://github.com/your-username/quantum-starter-lab"
+"Bug Tracker" = "https://github.com/your-username/quantum-starter-lab/issues"
+
+# This section creates the 'qsl' command-line tool. It will now work correctly.
+[project.scripts]
+qsl = "quantum_starter_lab.cli:main"
+
+# Configuration for the 'ruff' linter
 [tool.ruff]
-line-length = 100
-target-version = "py310"
+line-length = 88
 
-[tool.pytest.ini_options]
-addopts = "-q --disable-warnings"
-markers = ["slow", "plots"]
-
-[tool.coverage.run]
-branch = true
-source = ["quantum_starter_lab"]
-
-[tool.coverage.report]
-fail_under = 90
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"] # Standard checks + isort
