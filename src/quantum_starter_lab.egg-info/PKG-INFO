@@ -1,0 +1,37 @@
+Metadata-Version: 2.4
+Name: quantum-starter-lab
+Version: 0.1.0a0
+Summary: Beginner-friendly quantum demos with visuals and cross-framework runners.
+Author-email: Pranava Kumar <pranavakumar.it@gmail.com>
+License: Apache-2.0
+Keywords: quantum,education,qiskit,cirq,qkd
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Topic :: Education
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy<3,>=1.24
+Requires-Dist: typing-extensions>=4.8
+Provides-Extra: qiskit
+Requires-Dist: qiskit<2,>=1; extra == "qiskit"
+Requires-Dist: qiskit-aer>=0.14; extra == "qiskit"
+Provides-Extra: cirq
+Requires-Dist: cirq>=1.2; extra == "cirq"
+Provides-Extra: plots
+Requires-Dist: matplotlib>=3.7; extra == "plots"
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4; extra == "dev"
+Requires-Dist: pytest-cov>=4; extra == "dev"
+Requires-Dist: hypothesis>=6; extra == "dev"
+Requires-Dist: ruff>=0.4; extra == "dev"
+Requires-Dist: black>=24; extra == "dev"
+Requires-Dist: mypy>=1.8; extra == "dev"
+Requires-Dist: pyright>=1.1.350; extra == "dev"
+Requires-Dist: pre-commit>=3.6; extra == "dev"
+Requires-Dist: mkdocs-material>=9.5; extra == "dev"
+Requires-Dist: nbmake>=1.5; extra == "dev"
+Requires-Dist: syrupy>=4; extra == "dev"
+Requires-Dist: build>=1; extra == "dev"
+Requires-Dist: twine>=5; extra == "dev"
+Dynamic: license-file

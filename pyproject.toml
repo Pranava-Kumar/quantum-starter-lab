@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quantum-starter-lab"
+version = "0.1.0a0"
+description = "Beginner-friendly quantum demos with visuals and cross-framework runners."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Pranava Kumar", email = "pranavakumar.it@gmail.com" }]
+keywords = ["quantum", "education", "qiskit", "cirq", "qkd"]
+classifiers = [
+"Programming Language :: Python :: 3",
+"License :: OSI Approved :: Apache Software License",
+"Topic :: Education",
+]
+
+dependencies = ["numpy>=1.24,<3", "typing-extensions>=4.8"]
+
+[project.optional-dependencies]
+qiskit = ["qiskit>=1,<2", "qiskit-aer>=0.14"]
+cirq = ["cirq>=1.2"]
+plots = ["matplotlib>=3.7"]
+dev = [
+"pytest>=7.4", "pytest-cov>=4", "hypothesis>=6",
+"ruff>=0.4", "black>=24", "mypy>=1.8", "pyright>=1.1.350",
+"pre-commit>=3.6", "mkdocs-material>=9.5", "nbmake>=1.5", "syrupy>=4",
+"build>=1", "twine>=5"
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.pytest.ini_options]
+addopts = "-q --disable-warnings"
+markers = ["slow", "plots"]
+
+[tool.coverage.run]
+branch = true
+source = ["quantum_starter_lab"]
+
+[tool.coverage.report]
+fail_under = 90

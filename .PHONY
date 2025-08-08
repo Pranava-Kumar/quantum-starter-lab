@@ -1,0 +1,24 @@
+setup:
+uv venv --python 3.11 .venv
+uv pip install -e ".[dev,plots,qiskit]"
+uv run pre-commit install
+
+fmt:
+uv run ruff format .
+uv run black .
+
+lint:
+uv run ruff check .
+
+type:
+uv run mypy --strict src || true
+uv run pyright
+
+test:
+uv run pytest -q
+
+cov:
+uv run pytest -q --cov --cov-report=term-missing
+
+docs:
+uv run mkdocs serve -a 127.0.0.1:8000
