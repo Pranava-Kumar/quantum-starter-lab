@@ -7,6 +7,7 @@ from typing import Any, Dict, Optional
 # We will import these from our other files later
 from .plotting import create_summary_plot
 
+
 @dataclasses.dataclass
 class Results:
     """
@@ -15,6 +16,7 @@ class Results:
     Holds all the information from a run, including counts, diagrams,
     and explanations, and provides a simple .plot() method to visualize them.
     """
+
     counts: Dict[str, int]
     probabilities: Dict[str, float]
     circuit_diagram: str
@@ -34,9 +36,9 @@ class Results:
             self.matplotlib_figure = create_summary_plot(
                 counts=self.counts,
                 circuit_diagram=self.circuit_diagram,
-                title="Quantum Demo Results" # We can make this title dynamic later
+                title="Quantum Demo Results",  # We can make this title dynamic later
             )
-        
+
         # In a Jupyter notebook, this will display the plot automatically.
         # In a script, you might need to call plt.show() after this.
         return self.matplotlib_figure
@@ -48,5 +50,5 @@ class Results:
         output += f"Counts: {self.counts}\n"
         if self.fidelity is not None:
             output += f"Fidelity vs Ideal: {self.fidelity:.4f}\n"
-        output += f"-----------------------------------\n"
+        output += "-----------------------------------\n"
         return output

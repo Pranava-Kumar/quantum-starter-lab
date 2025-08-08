@@ -17,6 +17,7 @@ RUNNER_MAP = {
     "cirq.simulator": CirqRunner,
 }
 
+
 def run(
     ir: CircuitIR,
     shots: int,
@@ -39,15 +40,18 @@ def run(
 
     Returns:
         A Results object containing the simulation outcome.
-    
+
     Raises:
         ValueError: If the requested backend is not supported.
     """
     runner_class = RUNNER_MAP.get(backend)
-    
+
     if runner_class is None:
-        raise ValueError(f"Backend '{backend}' is not supported. Available backends are: {list(RUNNER_MAP.keys())}")
-        
+        raise ValueError(
+            f"Backend '{backend}' is not supported. Available backends are: "
+            f"{list(RUNNER_MAP.keys())}"
+        )
+
     # Create an instance of the chosen runner and run the circuit
     runner_instance = runner_class()
     return runner_instance.run(ir, shots, noise_spec, seed)

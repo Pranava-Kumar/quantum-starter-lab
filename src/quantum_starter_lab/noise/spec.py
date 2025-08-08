@@ -6,6 +6,7 @@ from typing import Literal
 
 NoiseName = Literal["none", "bit_flip", "depolarizing", "amplitude_damping"]
 
+
 @dataclasses.dataclass(frozen=True)
 class NoiseSpec:
     """
@@ -15,5 +16,6 @@ class NoiseSpec:
     The `frozen=True` argument makes instances of this class immutable,
     which helps prevent accidental changes.
     """
+
     name: NoiseName = "none"
     p: float = 0.0  # General probability parameter (for bit-flip, depolarizing)

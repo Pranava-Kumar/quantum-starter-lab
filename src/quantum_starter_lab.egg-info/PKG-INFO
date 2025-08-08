@@ -4,9 +4,9 @@ Version: 0.1.0
 Summary: A beginner-friendly Python layer for running and visualizing introductory quantum demos.
 Author-email: Pranava Kumar <pranavakumar.it@gmail.com>
 License: Apache-2.0
-Project-URL: Homepage, https://github.com/your-username/quantum-starter-lab
-Project-URL: Repository, https://github.com/your-username/quantum-starter-lab
-Project-URL: Bug Tracker, https://github.com/your-username/quantum-starter-lab/issues
+Project-URL: Homepage, https://github.com/Pranava-Kumar/quantum-starter-lab
+Project-URL: Repository, https://github.com/Pranava-Kumar/quantum-starter-lab
+Project-URL: Bug Tracker, https://github.com/Pranava-Kumar/quantum-starter-lab/issues
 Keywords: quantum computing,qiskit,education,quantum algorithms
 Classifier: Development Status :: 3 - Alpha
 Classifier: Intended Audience :: Education

@@ -4,6 +4,7 @@
 import math
 from typing import Dict, Union
 
+
 def normalize_counts(counts: Dict[str, int]) -> Dict[str, float]:
     """
     Converts a dictionary of measurement counts into a probability distribution.
@@ -18,9 +19,10 @@ def normalize_counts(counts: Dict[str, int]) -> Dict[str, float]:
     total_shots = sum(counts.values())
     if total_shots == 0:
         return {}
-    
+
     probabilities = {state: count / total_shots for state, count in counts.items()}
     return probabilities
+
 
 def calculate_fidelity(p_ideal: Dict[str, float], p_noisy: Dict[str, float]) -> float:
     """
@@ -37,14 +39,15 @@ def calculate_fidelity(p_ideal: Dict[str, float], p_noisy: Dict[str, float]) -> 
         The fidelity value, a float between 0.0 and 1.0.
     """
     fidelity = 0.0
-    all_states = set(p_ideal.keys()) | set(p_noisy.keys()) # Get all unique states
+    all_states = set(p_ideal.keys()) | set(p_noisy.keys())  # Get all unique states
 
     for state in all_states:
-        prob_ideal = p_ideal.get(state, 0.0) # Use 0.0 if state is missing
+        prob_ideal = p_ideal.get(state, 0.0)  # Use 0.0 if state is missing
         prob_noisy = p_noisy.get(state, 0.0)
         fidelity += math.sqrt(prob_ideal * prob_noisy)
-        
+
     return fidelity
+
 
 def sort_histogram(hist: Dict[str, Union[int, float]]) -> Dict[str, Union[int, float]]:
     """Sorts a histogram dictionary by its keys (bitstrings) for consistent display."""

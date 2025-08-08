@@ -12,6 +12,7 @@ from ..ir.circuit import CircuitIR
 from ..utils.hist import normalize_counts
 from ..utils.bitstrings import pad_bitstrings
 
+
 class CirqRunner(QuantumRunner):
     """A runner that executes circuits using the Cirq simulator."""
 
@@ -36,7 +37,7 @@ class CirqRunner(QuantumRunner):
         """
         # 1. Convert our IR to a Cirq circuit
         cirq_circuit = self._ir_to_cirq_circuit(ir)
-        
+
         # 2. Add noise to the circuit if specified
         if noise_spec and noise_spec.name != "none":
             noisy_circuit = apply_cirq_noise(cirq_circuit, noise_spec)
@@ -49,13 +50,13 @@ class CirqRunner(QuantumRunner):
         # 3. Process the results into our standard format
         measurements = result.measurements.get(ir.measure_all_key, [])
         counts = self._process_cirq_measurements(measurements, ir.n_qubits)
-        
+
         # 4. Pad bitstrings for consistency
         padded_counts = pad_bitstrings(counts, ir.n_qubits)
-        
+
         # 5. Create and return our standard Results object
         probabilities = normalize_counts(padded_counts)
-        
+
         return Results(
             counts=padded_counts,
             probabilities=probabilities,
@@ -72,11 +73,11 @@ class CirqRunner(QuantumRunner):
         for op in ir.operations:
             # Map our gate names to Cirq gate objects
             target_qubits = [qubits[i] for i in op.qubits]
-            if op.name.lower() == 'h':
+            if op.name.lower() == "h":
                 circuit.append(cirq.H.on_each(*target_qubits))
-            elif op.name.lower() == 'x':
+            elif op.name.lower() == "x":
                 circuit.append(cirq.X.on_each(*target_qubits))
-            elif op.name.lower() == 'cnot':
+            elif op.name.lower() == "cnot":
                 circuit.append(cirq.CNOT(target_qubits[0], target_qubits[1]))
             # Add more gate mappings here (e.g., for Z, Y, etc.)
 
@@ -92,4 +93,3 @@ class CirqRunner(QuantumRunner):
             bitstring = "".join(map(str, measurement))
             counts[bitstring] = counts.get(bitstring, 0) + 1
         return counts
-

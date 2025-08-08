@@ -9,6 +9,7 @@ from ..results import Results
 from ..noise.spec import NoiseSpec
 from ..ir.circuit import CircuitIR
 
+
 class QuantumRunner(ABC):
     """
     Abstract base class for a quantum circuit runner.
@@ -38,4 +39,3 @@ class QuantumRunner(ABC):
             A Results object containing the outcome of the simulation.
         """
         pass
-

@@ -4,6 +4,7 @@
 from typing import Optional
 import numpy as np
 
+
 def create_rng(seed: Optional[int] = None) -> np.random.Generator:
     """
     Creates a NumPy random number generator instance.

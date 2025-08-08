@@ -6,9 +6,11 @@ from typing import Optional
 from ..runners import run
 from ..ir.circuit import CircuitIR, Gate
 from ..noise.spec import NoiseSpec
+from ..results import Results
+
 
 def teleportation(
-    initial_state_angle: float = 0.0, # Angle to prepare the state to be teleported
+    initial_state_angle: float = 0.0,  # Angle to prepare the state to be teleported
     shots: int = 1024,
     noise_name: str = "none",
     p: float = 0.0,
@@ -40,26 +42,30 @@ def teleportation(
         n_qubits=3,
         operations=[
             # 1. Create the initial state for Alice to teleport.
-            Gate(name='u', qubits=[0], parameters={'theta': initial_state_angle, 'phi': 0, 'lambda': 0}),
-            
+            Gate(
+                name="u",
+                qubits=[0],
+                parameters={"theta": initial_state_angle, "phi": 0, "lambda": 0},
+            ),
             # 2. Create the entangled Bell pair between Alice (q1) and Bob (q2).
-            Gate(name='h', qubits=[1]),
-            Gate(name='cnot', qubits=[1, 2]),
-
+            Gate(name="h", qubits=[1]),
+            Gate(name="cnot", qubits=[1, 2]),
             # 3. Alice interacts her message qubit (q0) with her half of the pair (q1).
-            Gate(name='cnot', qubits=[0, 1]),
-            Gate(name='h', qubits=[0]),
-            
+            Gate(name="cnot", qubits=[0, 1]),
+            Gate(name="h", qubits=[0]),
             # 4. Alice measures her two qubits (q0, q1) and sends the classical results to Bob.
             # (The measurement is implicitly at the end in our IR).
-            
             # 5. Bob applies corrections to his qubit (q2) based on Alice's classical bits.
             # Our IR will need to support classically controlled operations for this.
-            Gate(name='x', qubits=[2], classical_control_bit=1), # Controlled by bit from q1
-            Gate(name='z', qubits=[2], classical_control_bit=0), # Controlled by bit from q0
-        ]
+            Gate(
+                name="x", qubits=[2], classical_control_bit=1
+            ),  # Controlled by bit from q1
+            Gate(
+                name="z", qubits=[2], classical_control_bit=0
+            ),  # Controlled by bit from q0
+        ],
     )
-    
+
     noise_spec = NoiseSpec(name=noise_name, p=p)
     results = run(ir=ir, shots=shots, noise_spec=noise_spec, backend=backend, seed=seed)
 
@@ -67,5 +73,5 @@ def teleportation(
         "Quantum Teleportation: The state of the first qubit was 'teleported' to the third qubit. "
         "The measurement of the third qubit should match the initial state prepared on the first."
     )
-    
+
     return results

@@ -7,6 +7,8 @@ from ..runners import run
 from ..ir.circuit import CircuitIR, Gate
 from ..noise.spec import NoiseSpec
 from ..explain import get_bell_explanation
+from ..results import Results
+
 
 def make_bell(
     shots: int = 1024,
@@ -33,9 +35,9 @@ def make_bell(
     ir = CircuitIR(
         n_qubits=2,
         operations=[
-            Gate(name='h', qubits=[0]),      # Hadamard gate on qubit 0
-            Gate(name='cnot', qubits=[0, 1]), # CNOT gate with control 0, target 1
-        ]
+            Gate(name="h", qubits=[0]),  # Hadamard gate on qubit 0
+            Gate(name="cnot", qubits=[0, 1]),  # CNOT gate with control 0, target 1
+        ],
     )
 
     # 2. Define the noise model from user input.

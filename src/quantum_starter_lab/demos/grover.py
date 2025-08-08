@@ -9,6 +9,7 @@ from ..ir.circuit import CircuitIR, Gate
 from ..noise.spec import NoiseSpec
 from ..explain import get_grover_explanation
 
+
 def grover(
     n_qubits: int,
     marked_item: str,
@@ -37,16 +38,22 @@ def grover(
     # The oracle "marks" the item we're searching for by flipping its phase.
     # A common way to do this is with a multi-controlled Z gate.
     # For simplicity, we'll represent it as a named operation.
-    oracle = Gate(name='mcz', qubits=list(range(n_qubits)), parameters={'marked': marked_item})
+    oracle = Gate(
+        name="mcz", qubits=list(range(n_qubits)), parameters={"marked": marked_item}
+    )
 
     # --- 2. Build the Diffuser ---
     # The diffuser amplifies the amplitude of the marked state.
     diffuser = [
-        Gate(name='h', qubits=list(range(n_qubits))),
-        Gate(name='x', qubits=list(range(n_qubits))),
-        Gate(name='mcz', qubits=list(range(n_qubits - 1)), parameters={'target': n_qubits - 1}), # (n-1)-controlled Z
-        Gate(name='x', qubits=list(range(n_qubits))),
-        Gate(name='h', qubits=list(range(n_qubits))),
+        Gate(name="h", qubits=list(range(n_qubits))),
+        Gate(name="x", qubits=list(range(n_qubits))),
+        Gate(
+            name="mcz",
+            qubits=list(range(n_qubits - 1)),
+            parameters={"target": n_qubits - 1},
+        ),  # (n-1)-controlled Z
+        Gate(name="x", qubits=list(range(n_qubits))),
+        Gate(name="h", qubits=list(range(n_qubits))),
     ]
 
     # --- 3. Determine Optimal Number of Iterations ---
@@ -54,13 +61,10 @@ def grover(
     num_iterations = math.floor(math.pi / 4 * math.sqrt(2**n_qubits))
 
     # --- 4. Build the Full Circuit ---
-    initialization = [Gate(name='h', qubits=list(range(n_qubits)))]
+    initialization = [Gate(name="h", qubits=list(range(n_qubits)))]
     grover_iterations = ([oracle] + diffuser) * num_iterations
-    
-    ir = CircuitIR(
-        n_qubits=n_qubits,
-        operations=initialization + grover_iterations
-    )
+
+    ir = CircuitIR(n_qubits=n_qubits, operations=initialization + grover_iterations)
 
     noise_spec = NoiseSpec(name=noise_name, p=p)
     results = run(ir=ir, shots=shots, noise_spec=noise_spec, backend=backend, seed=seed)
@@ -71,5 +75,5 @@ def grover(
         f"{get_grover_explanation(n_qubits)}"
     )
     results.explanation = explanation
-    
+
     return results

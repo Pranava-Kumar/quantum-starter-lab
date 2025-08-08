@@ -2,7 +2,14 @@
 # Simple CLI for running quantum demos from the terminal.
 
 import argparse
-from .demos import bell, dj, bv, grover, teleportation  # Import demo functions (add these later)
+from .demos import (
+    bell,
+    dj,
+    bv,
+    grover,
+    teleportation,
+)  # Import demo functions (add these later)
+
 
 def main():
     parser = argparse.ArgumentParser(
@@ -12,12 +19,25 @@ def main():
 
     # Bell demo command
     bell_parser = subparsers.add_parser("bell", help="Run Bell state demo")
-    bell_parser.add_argument("--noise", default="none", choices=["none", "bit_flip", "depolarizing"], help="Noise type")
-    bell_parser.add_argument("--p", type=float, default=0.0, help="Noise probability (0.0 to 1.0)")
-    bell_parser.add_argument("--shots", type=int, default=1024, help="Number of simulation shots")
-    bell_parser.add_argument("--seed", type=int, default=42, help="Random seed for reproducibility")
+    bell_parser.add_argument(
+        "--noise",
+        default="none",
+        choices=["none", "bit_flip", "depolarizing"],
+        help="Noise type",
+    )
+    bell_parser.add_argument(
+        "--p", type=float, default=0.0, help="Noise probability (0.0 to 1.0)"
+    )
+    bell_parser.add_argument(
+        "--shots", type=int, default=1024, help="Number of simulation shots"
+    )
+    bell_parser.add_argument(
+        "--seed", type=int, default=42, help="Random seed for reproducibility"
+    )
     bell_parser.add_argument("--backend", default="qiskit.aer", help="Backend to use")
-    bell_parser.add_argument("--plot", action="store_true", help="Show plot (requires matplotlib)")
+    bell_parser.add_argument(
+        "--plot", action="store_true", help="Show plot (requires matplotlib)"
+    )
 
     # Deutsch-Jozsa demo command (add similar for others)
     dj_parser = subparsers.add_parser("dj", help="Run Deutsch-Jozsa demo")
@@ -32,7 +52,11 @@ def main():
 
     if args.command == "bell":
         results = bell.make_bell(
-            noise=args.noise, p=args.p, shots=args.shots, seed=args.seed, backend=args.backend
+            noise=args.noise,
+            p=args.p,
+            shots=args.shots,
+            seed=args.seed,
+            backend=args.backend,
         )
         print(results.explanation)  # Print the plain-language summary
         print(f"Counts: {results.counts}")
@@ -44,6 +68,7 @@ def main():
     # Add elif for other commands
     else:
         parser.print_help()
+
 
 if __name__ == "__main__":
     main()

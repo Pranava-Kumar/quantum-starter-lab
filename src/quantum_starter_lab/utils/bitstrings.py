@@ -3,6 +3,7 @@
 
 from typing import Dict
 
+
 def pad_bitstrings(counts: Dict[str, int], n_qubits: int) -> Dict[str, int]:
     """
     Ensures all bitstring keys in a counts dictionary have the same length.
@@ -25,7 +26,8 @@ def pad_bitstrings(counts: Dict[str, int], n_qubits: int) -> Dict[str, int]:
         padded_counts[padded_key] = count
     return padded_counts
 
+
 def int_to_bitstring(number: int, n_qubits: int) -> str:
     """Converts an integer to a padded bitstring of a specific length."""
     # Example: int_to_bitstring(5, 4) -> "0101"
-    return format(number, f'0{n_qubits}b')
+    return format(number, f"0{n_qubits}b")
