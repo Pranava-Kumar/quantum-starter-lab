@@ -1,38 +1,52 @@
-from dataclasses import dataclass
-from typing import Any, Dict, Mapping, Optional
+# src/quantum_starter_lab/results.py
+# Defines the custom container for holding and displaying demo results.
 
-@dataclass
-class DemoResult:
-  name: str
-  n_qubits: int
-  circuit_ascii: str
-  circuit_native: Any
-  counts: Mapping[str, int]
-  prob_ideal: Optional[Mapping[str, float]]
-  prob_noisy: Optional[Mapping[str, float]]
-  metrics: Dict[str, float]
-  explanation: str
-  figures: Dict[str, Any]
-  metadata: Dict[str, Any]
-  
-def plot(self, side_by_side: bool = True, show: bool = True, savepath: Optional[str] = None) -> Any:
-    try:
-        import matplotlib.pyplot as plt  # optional
-    except Exception:
-        print('plot(): matplotlib not installed. Install with: uv pip install -e ".[plots]"')
-        return None
-    keys = list(self.counts.keys())
-    vals = [self.counts[k] for k in keys]
-    fig, ax = plt.subplots(figsize=(6, 3))
-    ax.bar(keys, vals, color="#4C78A8")
-    ax.set_title(self.name)
-    ax.set_xlabel("bitstring (big-endian)")
-    ax.set_ylabel("counts")
-    if savepath:
-        fig.savefig(savepath, bbox_inches="tight", dpi=200)
-    if show:
-        plt.show()
-    return fig
+import dataclasses
+from typing import Any, Dict, Optional
 
-def show_circuit(self) -> str:
-    return self.circuit_ascii
+# We will import these from our other files later
+from .plotting import create_summary_plot
+
+@dataclasses.dataclass
+class Results:
+    """
+    A container for the results of a quantum demo.
+
+    Holds all the information from a run, including counts, diagrams,
+    and explanations, and provides a simple .plot() method to visualize them.
+    """
+    counts: Dict[str, int]
+    probabilities: Dict[str, float]
+    circuit_diagram: str
+    explanation: str
+    raw_backend_result: Any
+    fidelity: Optional[float] = None
+    matplotlib_figure: Optional[Any] = None
+
+    def plot(self):
+        """
+        Generates and displays a summary plot of the results.
+
+        The plot includes the circuit diagram and a histogram of the counts.
+        """
+        if self.matplotlib_figure is None:
+            # Create the plot using our helper function from plotting.py
+            self.matplotlib_figure = create_summary_plot(
+                counts=self.counts,
+                circuit_diagram=self.circuit_diagram,
+                title="Quantum Demo Results" # We can make this title dynamic later
+            )
+        
+        # In a Jupyter notebook, this will display the plot automatically.
+        # In a script, you might need to call plt.show() after this.
+        return self.matplotlib_figure
+
+    def __str__(self) -> str:
+        """Provides a simple text summary when printing the object."""
+        output = f"--- Quantum Starter Lab Results ---\n"
+        output += f"Explanation: {self.explanation}\n"
+        output += f"Counts: {self.counts}\n"
+        if self.fidelity is not None:
+            output += f"Fidelity vs Ideal: {self.fidelity:.4f}\n"
+        output += f"-----------------------------------\n"
+        return output
