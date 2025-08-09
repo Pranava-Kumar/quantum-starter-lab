@@ -7,7 +7,7 @@ from typing import Literal
 NoiseName = Literal["none", "bit_flip", "depolarizing", "amplitude_damping"]
 
 
-@dataclasses.dataclass(frozen=True)
+@dataclasses.dataclass(frozen=False)
 class NoiseSpec:
     """A simple, immutable container for describing a noise model.
 
