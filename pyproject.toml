@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "quantum-starter-lab"
-version = "0.1.0"
+version = "0.1.1"
 description = "A beginner-friendly Python layer for running and visualizing introductory quantum demos."
 authors = [
     { name = "Pranava Kumar", email = "pranavakumar.it@gmail.com" },
