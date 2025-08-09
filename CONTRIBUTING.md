@@ -1,69 +1,86 @@
-# Contributing to quantum-starter-lab
+Contributing to quantum-starter-lab
 
-First off, thank you for considering contributing! We are thrilled you're here and excited to collaborate with you. Your contributions, no matter how small, are valued and help make this project better for everyone [1].
+Thank you for your interest in contributing to quantum-starter-lab! This project aims to make quantum computing accessible for education, research, and experimentation. Whether you're fixing bugs, adding new features, improving documentation, or suggesting ideas, your contributions are welcome and valued.
 
-This document provides a set of guidelines for contributing to `quantum-starter-lab`.
+By contributing, you help build a better tool for the quantum community. Please follow these guidelines to ensure a smooth process.
 
-## Code of Conduct
+Code of Conduct
 
-By participating in this project, you agree to abide by our [Code of Conduct](./CODE_OF_CONDUCT.md). Please read it to understand the standards of behavior we expect [4].
+This project adheres to the Contributor Covenant Code of Conduct. By participating, you are expected to uphold this code. Please report unacceptable behavior to pranavakumar.it@gmail.com.
 
-## How Can I Contribute?
+How to Contribute
+There are many ways to contribute:
 
-There are many ways to contribute, from writing code and documentation to reporting bugs and suggesting new features.
+Report Issues: If you find a bug, have a feature request, or spot documentation issues, open an issue on GitHub. Provide as much detail as possible, including steps to reproduce, expected behavior, and screenshots if applicable.
 
-### Reporting Bugs
+Suggest Improvements: For enhancements like new algorithms (e.g., VQE, QAOA) or backend integrations, open an issue first to discuss before coding.
 
-If you find a bug, please open a new **issue** on our GitHub repository. A great bug report includes:
--   A clear and descriptive title.
--   A description of the steps to reproduce the bug.
--   What you expected to happen vs. what actually happened.
--   The version of `quantum-starter-lab` and Python you are using.
+Submit Pull Requests: For code changes, follow the steps below.
 
-### Suggesting Enhancements
+Setting Up for Development
+To contribute code, set up a local development environment:
 
-If you have an idea for a new feature or an improvement, please open an **issue** to discuss it first. This allows us to coordinate efforts and ensure the feature aligns with the project's goals before you spend time on implementation [6].
+Fork the Repository:
 
-### Your First Code Contribution
+Go to https://github.com/Pranava-Kumar/quantum-starter-lab.
 
-Ready to write some code? Here’s how to set up your environment and submit your changes.
+Click "Fork" to create your own copy.
 
-#### 1. Fork and Clone the Repository
+Clone Your Fork:
 
-First, **fork** the repository to your own GitHub account. Then, clone your fork to your local machine [5]:
-
-git clone https://github.com/Pranava-Kumar/quantum-starter-lab.git
+git clone https://github.com/YOUR-USERNAME/quantum-starter-lab.git
 cd quantum-starter-lab
+Create a Virtual Environment (using uv for speed):
 
-#### 2. Set Up Your Development Environment
+uv venv
+.venv\Scripts\activate  # On Windows; use source .venv/bin/activate on Unix
+Install Dependencies:
 
-We use `uv` for package management. To install all the dependencies needed for development (including tools for testing and linting), run:
 uv sync --all-extras --dev
+uv pip install -e .  # Editable install for development
+Verify Setup:
 
-Or, you can use the `make` shortcut:
-make install
+make lint  # Check code style
+make test  # Run all tests
+Requirements: Python >=3.10. If tests fail, check for missing dependencies like Qiskit or Cirq.
 
-#### 3. Create a New Branch
+Development Guidelines
+Branching: Create a new branch for your work: git checkout -b feature/your-feature-name or bugfix/issue-number.
 
-Create a descriptive branch for your changes [5]:
-git checkout -b feature/my-cool-new-feature
+Coding Style: Follow PEP 8. Use Ruff for linting (make lint). Keep code modular and well-commented.
 
-#### 4. Make Your Changes and Run Checks
+Commits: Write clear, concise commit messages (e.g., "Add VQE function with scipy optimizer").
 
-Write your code! As you work, please adhere to the following:
--   **Coding Style**: We use `black` for code formatting and `ruff` for linting. You can automatically format your code by running `make format`.
--   **Testing**: If you add a new feature, please add tests for it. You can run the full test suite with `make test`. All tests must pass for your contribution to be accepted [6, 10].
+Testing: Add unit tests for new features in the tests/ folder. Aim for 100% coverage. Run make test before submitting.
 
-#### 5. Commit and Push
+Documentation: Update README.md or add to docs/ if introducing new features. Use Markdown for clarity.
 
-Commit your changes with a clear commit message:
-git commit -m "feat: Add my cool new feature"
-git push origin feature/my-cool-new-feature
+Pull Request Process:
 
-#### 6. Submit a Pull Request
+Push your branch: git push origin your-branch-name.
 
-Finally, go to your fork on GitHub and open a **Pull Request (PR)** to the `main` branch of the original repository. Provide a clear description of your changes in the PR.
+Open a Pull Request on the original repo.
 
-Once you submit your PR, a project maintainer will review it. We appreciate your patience and will do our best to provide feedback in a timely manner.
+Reference any related issues (e.g., "Fixes #123").
 
-Thank you again for your contribution!
+Describe changes, why they're needed, and how to test them.
+
+Your PR will be reviewed; be open to feedback.
+
+Areas for Contribution
+Bug Fixes: Address test failures or runtime errors.
+
+New Demos: Add advanced algorithms like VQE or QAOA.
+
+Enhancements: Improve noise models, add real hardware support, or integrate ML tools.
+
+Docs and Examples: Write tutorials or Jupyter notebooks.
+
+Performance: Optimize simulations for larger qubit counts.
+
+First-time contributors: Look for issues labeled "good first issue" or "help wanted".
+
+License
+By contributing, you agree that your contributions will be licensed under the project's Apache License 2.0.
+
+Thank you for helping make quantum-starter-lab better! If you have questions, open an issue or email pranavakumar.it@gmail.com.
