@@ -52,6 +52,8 @@ def bernstein_vazirani(
     noise_spec = NoiseSpec(name=noise_name, p=p)
     results = run(ir=ir, shots=shots, noise_spec=noise_spec, backend=backend, seed=seed)
 
+    shots = sum(results.counts.values())
+
     bv_counts: dict[str, int] = {}
     for bitstring, _count in results.counts.items():
         data_bits = bitstring[:-1][::-1]  # Reverse for q0 left, ignore ancilla

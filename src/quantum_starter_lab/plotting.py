@@ -4,7 +4,7 @@
 
 import matplotlib
 
-matplotlib.use("TkAgg")  # Non-interactive (file-only) backend for tests
+matplotlib.use("QtAgg")  # Non-interactive (file-only) backend for tests
 import matplotlib.pyplot as plt
 
 

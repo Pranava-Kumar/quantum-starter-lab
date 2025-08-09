@@ -19,28 +19,29 @@ def deutsch_jozsa(
     seed: int | None = None,
 ) -> "Results":
     """Creates and runs the Deutsch-Jozsa algorithm."""
+    
+    target = n_qubits
+    
     # --- Build the Oracle ---
-    oracle_ops: list[Gate] = []
+    oracle_ops = []
     if oracle_type == "constant":
         # For constant-0: do nothing
-        oracle_ops = []
+        pass
     elif oracle_type == "balanced":
         # Balanced: CNOT from alternating inputs
-        oracle_ops = [
-            Gate(name="cnot", qubits=[i, n_qubits])
-            for i in range(n_qubits)
-            if i % 2 == 0
-        ]
-    target_prep = [Gate(name="x", qubits=[n_qubits]), Gate(name="h", qubits=[n_qubits])]
-    oracle_ops = target_prep + oracle_ops
+        oracle_ops = [Gate(name="cnot", qubits=[0, n_qubits])]
+    [Gate(name="x", qubits=[n_qubits]), Gate(name="h", qubits=[n_qubits])]
+    hadamard_inputs = [Gate(name="h", qubits=list(range(n_qubits)))]
+    final_hadamards = [Gate(name="h", qubits=list(range(n_qubits)))]
+    oracle_ops = hadamard_inputs + oracle_ops + final_hadamards
 
     # --- Build the Full Circuit ---
     ir = CircuitIR(
         n_qubits=n_qubits + 1,  # One extra qubit for the oracle
         operations=[
             Gate(name="h", qubits=list(range(n_qubits))),
-            Gate(name="x", qubits=[n_qubits]),
-            Gate(name="h", qubits=[n_qubits]),
+            Gate(name="x", qubits=[target]),
+            Gate(name="h", qubits=[target]),
             *oracle_ops,
             Gate(name="h", qubits=list(range(n_qubits))),
         ],

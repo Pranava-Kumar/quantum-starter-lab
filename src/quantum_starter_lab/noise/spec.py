@@ -1,13 +1,13 @@
 # src/quantum_starter_lab/noise/spec.py
 # Defines the specification for a noise model.
 
-import dataclasses
+from dataclasses import dataclass
 from typing import Literal
 
 NoiseName = Literal["none", "bit_flip", "depolarizing", "amplitude_damping"]
 
 
-@dataclasses.dataclass(frozen=False)
+@dataclass
 class NoiseSpec:
     """A simple, immutable container for describing a noise model.
 
@@ -16,15 +16,14 @@ class NoiseSpec:
     which helps prevent accidental changes.
     """
 
-    def __init__(
-        self,
-        name: Literal[
-            "none", "bit_flip", "depolarizing", "amplitude_damping", "custom"
-        ] = "none",
-        **kwargs,
-    ):
-        self.name: NoiseName = name
-        if name == "custom":
-            self.custom_noise = kwargs
-        else:
-            self.p: float = 0.0
+    name: NoiseName = "none"
+    p: float = 0.0
+
+    def __post_init__(self):
+        valid_names = ["none", "bit_flip", "depolarizing", "amplitude_damping"]
+        if self.name not in valid_names:
+            raise ValueError(f"Invalid noise name: {self.name}")
+        if not (0.0 <= self.p <= 1.0):
+            raise ValueError(f"Probability p must be between 0 and 1, got {self.p}")
+        if self.name == "custom" and "custom_noise" not in self.__dict__:
+            raise ValueError("Custom noise requires 'custom_noise' parameter.")

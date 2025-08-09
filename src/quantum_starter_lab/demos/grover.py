@@ -39,6 +39,10 @@ def grover(
     # A common way to do this is with a multi-controlled Z gate.
     # For simplicity, we'll represent it as a named operation.
     oracle_ops = []
+    # For oracle, use phase flip for marked item
+    oracle_ops = [Gate("x", [i]) for i in range(n_qubits) if marked_item[i] == '0']
+    oracle_ops += [Gate("mcz", list(range(n_qubits)))]
+    oracle_ops += [Gate("x", [i]) for i in range(n_qubits) if marked_item[i] == '0']
     # Flip for '110' (X on bits that should be 0)
     oracle_ops.extend(
         [
@@ -53,13 +57,13 @@ def grover(
     # --- 2. Build the Diffuser ---
     # The diffuser amplifies the amplitude of the marked state.
     diffuser = [
-        Gate("h", [0, 1, 2]),
-        Gate("x", [0, 1, 2]),
-        Gate("h", [2]),
-        Gate("ccx", [0, 1, 2]),
-        Gate("h", [2]),
-        Gate("x", [0, 1, 2]),
-        Gate("h", [0, 1, 2]),
+        Gate("h", list(range(n_qubits))),
+        Gate("x", list(range(n_qubits))),
+        Gate("h", [n_qubits-1]),
+        Gate("mcz", list(range(n_qubits))),  # Multi-control Z
+        Gate("h", [n_qubits-1]),
+        Gate("x", list(range(n_qubits))),
+        Gate("h", list(range(n_qubits))),
     ]
 
     # --- 3. Determine Optimal Number of Iterations ---
@@ -70,8 +74,7 @@ def grover(
     initialization = [Gate(name="h", qubits=list(range(n_qubits)))]
     grover_iterations = []
     for _ in range(num_iterations):
-        grover_iterations.extend(oracle_ops)
-        grover_iterations.extend(diffuser)
+        grover_iterations += oracle_ops + diffuser
 
     ir = CircuitIR(n_qubits=n_qubits, operations=initialization + grover_iterations)
 

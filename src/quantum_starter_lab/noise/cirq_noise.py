@@ -5,7 +5,6 @@ import cirq
 
 from .spec import NoiseSpec
 
-
 def apply_cirq_noise(circuit: cirq.Circuit, spec: NoiseSpec) -> cirq.Circuit:
     """Applies noise to a Cirq circuit based on the provided specification.
 
@@ -29,4 +28,5 @@ def apply_cirq_noise(circuit: cirq.Circuit, spec: NoiseSpec) -> cirq.Circuit:
         # If no known noise, return the original circuit
         return circuit
 
+    noisy_circuit = circuit.with_noise(noise)
     return noisy_circuit

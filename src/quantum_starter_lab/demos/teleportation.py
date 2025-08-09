@@ -83,6 +83,11 @@ def teleportation(
         "quantum teleportation."
     )
 
+    # After running the simulation and getting results
+    shots = sum(results.counts.values())
+    if shots == 0:
+        raise RuntimeError("Simulation returned no shots; check circuit execution.")
+
     # Simulate classical corrections (since runners don't support conditioned gates)
     corrected_counts: dict[str, int] = {}
     for bitstring, count in results.counts.items():
