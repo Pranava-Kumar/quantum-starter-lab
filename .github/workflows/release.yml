@@ -4,6 +4,9 @@ on:
   push:
     tags:
       - "v*.*.*"  # Triggers on tags like v0.1.0
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   release:
