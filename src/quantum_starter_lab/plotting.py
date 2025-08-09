@@ -3,6 +3,9 @@
 
 from typing import Dict
 
+import matplotlib
+
+matplotlib.use("Agg")  # Non-interactive (file-only) backend for tests
 import matplotlib.pyplot as plt
 
 

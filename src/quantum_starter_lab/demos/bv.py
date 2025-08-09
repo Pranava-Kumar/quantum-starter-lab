@@ -6,9 +6,10 @@ from typing import Optional
 from ..explain import get_bv_explanation
 from ..ir.circuit import CircuitIR, Gate
 from ..noise.spec import NoiseSpec
+from ..results import Results
 from ..runners import run
 from ..utils.rng import create_rng
-from ..results import Results
+
 
 def bernstein_vazirani(
     n_qubits: int,
@@ -52,6 +53,14 @@ def bernstein_vazirani(
 
     noise_spec = NoiseSpec(name=noise_name, p=p)
     results = run(ir=ir, shots=shots, noise_spec=noise_spec, backend=backend, seed=seed)
+
+    bv_counts = {}
+    for bitstring, count in results.counts.items():
+        data_bits = bitstring[:-1][::-1]  # Reverse for q0 left, ignore ancilla
+    if bitstring.endswith("1"):  # BV ancilla should be 1 for secret
+        bv_counts[data_bits] = bv_counts.get(data_bits, 0) + count
+    results.counts = bv_counts
+    results.probabilities = {k: v / shots for k, v in bv_counts.items()}
 
     explanation = (
         f"The secret string to find was '{secret_string}'. "

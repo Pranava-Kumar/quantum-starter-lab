@@ -25,18 +25,28 @@ def apply_qiskit_noise(spec: NoiseSpec) -> NoiseModel:
     noise_model = NoiseModel()
 
     if spec.name == "bit_flip":
-        # The new way: Create a Pauli error with a probability for the X gate.
-        error = pauli_error([("X", spec.p), ("I", 1 - spec.p)])
-        noise_model.add_all_qubit_quantum_error(error, ["h", "x", "cnot"])
+        error_1q = pauli_error([("X", spec.p), ("I", 1 - spec.p)])
+        noise_model.add_all_qubit_quantum_error(error_1q, ["u1", "u2", "u3", "h", "x"])
+
+        error_2q = pauli_error([("X", spec.p), ("I", 1 - spec.p)]).tensor(
+            pauli_error([("X", spec.p), ("I", 1 - spec.p)])
+        )
+        noise_model.add_all_qubit_quantum_error(error_2q, ["cx"])
 
     elif spec.name == "depolarizing":
-        error_1 = depolarizing_error(spec.p, 1)
-        error_2 = depolarizing_error(spec.p, 2)
-        noise_model.add_all_qubit_quantum_error(error_1, ["h", "x"])
-        noise_model.add_all_qubit_quantum_error(error_2, ["cnot"])
+        error_1q = depolarizing_error(spec.p, 1)
+        noise_model.add_all_qubit_quantum_error(error_1q, ["u1", "u2", "u3", "h", "x"])
+
+        error_2q = depolarizing_error(spec.p * 4 / 3, 2)
+        noise_model.add_all_qubit_quantum_error(error_2q, ["cx"])
 
     elif spec.name == "amplitude_damping":
-        error = amplitude_damping_error(spec.p)
-        noise_model.add_all_qubit_quantum_error(error, ["h", "x", "cnot"])
+        error_1q = amplitude_damping_error(spec.p)
+        noise_model.add_all_qubit_quantum_error(error_1q, ["u1", "u2", "u3", "h", "x"])
+
+        error_2q = amplitude_damping_error(spec.p).tensor(
+            amplitude_damping_error(spec.p)
+        )
+        noise_model.add_all_qubit_quantum_error(error_2q, ["cx"])
 
     return noise_model

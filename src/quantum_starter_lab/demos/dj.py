@@ -6,8 +6,9 @@ from typing import Optional
 from ..explain import get_dj_explanation
 from ..ir.circuit import CircuitIR, Gate
 from ..noise.spec import NoiseSpec
-from ..runners import run
 from ..results import Results
+from ..runners import run
+
 
 def deutsch_jozsa(
     n_qubits: int,
@@ -23,11 +24,18 @@ def deutsch_jozsa(
     """
     # --- Build the Oracle ---
     oracle_ops = []
-    if oracle_type == "balanced":
-        # A simple balanced oracle: CNOTs from each data qubit to the target
-        for i in range(n_qubits):
-            oracle_ops.append(Gate(name="cnot", qubits=[i, n_qubits]))
-    # For a "constant" oracle, we do nothing or apply an X gate to the target.
+    if oracle_type == "constant":
+        # For constant-0: do nothing
+        oracle_ops = []
+    elif oracle_type == "balanced":
+        # Balanced: CNOT from alternating inputs
+        oracle_ops = [
+            Gate(name="cnot", qubits=[i, n_qubits])
+            for i in range(n_qubits)
+            if i % 2 == 0
+        ]
+    target_prep = [Gate(name="x", qubits=[n_qubits]), Gate(name="h", qubits=[n_qubits])]
+    oracle_ops = target_prep + oracle_ops
 
     # --- Build the Full Circuit ---
     ir = CircuitIR(

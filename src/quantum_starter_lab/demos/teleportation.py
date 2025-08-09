@@ -3,10 +3,13 @@
 
 from typing import Optional
 
+from quantum_starter_lab.utils.hist import normalize_counts
+
 from ..ir.circuit import CircuitIR, Gate
 from ..noise.spec import NoiseSpec
 from ..results import Results
 from ..runners import run
+
 
 def teleportation(
     initial_state_angle: float = 0.0,  # Angle to prepare the state to be teleported
@@ -80,5 +83,21 @@ def teleportation(
         "This demonstrates the power of quantum entanglement and "
         "quantum teleportation."
     )
+
+    # Simulate classical corrections (since runners don't support conditioned gates)
+    corrected_counts = {}
+    for bitstring, count in results.counts.items():
+        m1, m2, bob = bitstring
+        corrected_bob = bob
+        if m2 == "1":
+            corrected_bob = "0" if corrected_bob == "1" else "1"  # X correction
+        if m1 == "1":
+            pass  # For basis measurement of |1>, Z doesn't change count;
+            # adjust if using phase
+            corrected_counts[corrected_bob] = (
+                corrected_counts.get(corrected_bob, 0) + count
+            )
+    results.counts = corrected_counts
+    results.probabilities = normalize_counts(corrected_counts)
 
     return results

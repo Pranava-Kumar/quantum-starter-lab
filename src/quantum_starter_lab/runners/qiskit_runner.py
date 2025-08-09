@@ -39,13 +39,20 @@ class QiskitRunner(QuantumRunner):
             noise_model = apply_qiskit_noise(noise_spec)
 
         # 4. Run the simulation
+        # In run method, before simulator.run:
+        method = "density_matrix" if noise_model else "automatic"
         result = simulator.run(
-            qiskit_circuit, shots=shots, seed_simulator=seed, noise_model=noise_model
+            qiskit_circuit,
+            shots=shots,
+            seed_simulator=seed,
+            noise_model=noise_model,
+            method=method,  # Add this
         ).result()
 
         # 5. Process the results into our standard format
         counts = result.get_counts(qiskit_circuit)
-        probabilities = normalize_counts(counts)
+        standardized_counts = {k[::-1]: v for k, v in counts.items()}
+        probabilities = normalize_counts(standardized_counts)
 
         # 6. Create and return our standard Results object
         return Results(

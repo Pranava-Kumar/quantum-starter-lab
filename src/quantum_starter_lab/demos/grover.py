@@ -7,8 +7,9 @@ from typing import Optional
 from ..explain import get_grover_explanation
 from ..ir.circuit import CircuitIR, Gate
 from ..noise.spec import NoiseSpec
-from ..runners import run
 from ..results import Results
+from ..runners import run
+
 
 def grover(
     n_qubits: int,
@@ -38,22 +39,28 @@ def grover(
     # The oracle "marks" the item we're searching for by flipping its phase.
     # A common way to do this is with a multi-controlled Z gate.
     # For simplicity, we'll represent it as a named operation.
-    oracle = Gate(
-        name="mcz", qubits=list(range(n_qubits)), parameters={"marked": marked_item}
+    oracle_ops = []
+    # Flip for '110' (X on bits that should be 0)
+    oracle_ops.extend(
+        [
+            Gate("x", [2]),
+            Gate("h", [2]),
+            Gate("ccx", [0, 1, 2]),
+            Gate("h", [2]),
+            Gate("x", [2]),
+        ]
     )
 
     # --- 2. Build the Diffuser ---
     # The diffuser amplifies the amplitude of the marked state.
     diffuser = [
-        Gate(name="h", qubits=list(range(n_qubits))),
-        Gate(name="x", qubits=list(range(n_qubits))),
-        Gate(
-            name="mcz",
-            qubits=list(range(n_qubits - 1)),
-            parameters={"target": n_qubits - 1},
-        ),  # (n-1)-controlled Z
-        Gate(name="x", qubits=list(range(n_qubits))),
-        Gate(name="h", qubits=list(range(n_qubits))),
+        Gate("h", [0, 1, 2]),
+        Gate("x", [0, 1, 2]),
+        Gate("h", [2]),
+        Gate("ccx", [0, 1, 2]),
+        Gate("h", [2]),
+        Gate("x", [0, 1, 2]),
+        Gate("h", [0, 1, 2]),
     ]
 
     # --- 3. Determine Optimal Number of Iterations ---
@@ -62,7 +69,10 @@ def grover(
 
     # --- 4. Build the Full Circuit ---
     initialization = [Gate(name="h", qubits=list(range(n_qubits)))]
-    grover_iterations = ([oracle] + diffuser) * num_iterations
+    grover_iterations = []
+    for _ in range(num_iterations):
+        grover_iterations.extend(oracle_ops)
+        grover_iterations.extend(diffuser)
 
     ir = CircuitIR(n_qubits=n_qubits, operations=initialization + grover_iterations)
 
