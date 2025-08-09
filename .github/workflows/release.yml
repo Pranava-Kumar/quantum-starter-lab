@@ -3,35 +3,32 @@ name: Release to PyPI
 on:
   push:
     tags:
-      - "v*.*.*"  # Triggers on tags like v0.1.0
+      - "v*.*.*"  # Triggers on tags like v0.1.0, v0.1.1, etc.
+
 permissions:
-  id-token: write
-  contents: read
+  id-token: write  # Required for OIDC authentication to PyPI
+  contents: read   # Allows reading the repo contents
 
 jobs:
   release:
     runs-on: ubuntu-latest  # Builds on Linux for clean PyPI packages
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v4  # Checks out your repo code
 
-    - name: Set up uv
+    - name: Set up uv  # Sets up uv for fast dependency management
       uses: astral-sh/setup-uv@v3
       with:
         version: latest
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.12"  # Use a recent version for building
-
-    - name: Install dependencies
+    - name: Install dependencies  # Syncs from pyproject.toml
       run: uv sync --all-extras --dev
 
-    - name: Build package
+    - name: Build package  # Builds the .whl and .tar.gz files
       run: uv build
 
-    - name: Publish to PyPI
-      env:
-        PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}  # Add this secret in GitHub repo settings
-      run: uv publish --token $PYPI_TOKEN
+    - name: Publish to PyPI  # Publishes using OIDC (no token needed!)
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        print-hash: true  # Optional: Prints hashes for verification
+        verbose: true     # Optional: More detailed output for debugging
