@@ -126,7 +126,7 @@ Expected output includes printed results and plots for each demo.
 
 ### For research workflows, export data:
 
-results.export_data("results.json")  # Upcoming feature in v0.2.0
+results.export_data("results.json")  # Upcoming feature in v0.2.0 
 
 # Setup and Development
 
