@@ -7,7 +7,7 @@
 
 This package abstracts complex quantum frameworks, making it easy to experiment with entanglement, superposition, and more—perfect for students, educators, and researchers exploring noisy intermediate-scale quantum (NISQ) applications without building everything from scratch.
 
-##Features:
+## Features:
 
 Easy-to-Use API: Run quantum demos with minimal code.
 
@@ -30,15 +30,20 @@ Cross-Platform: Works on Windows, macOS, and Linux.
 You can install quantum-starter-lab from PyPI using pip or uv (recommended for faster installs).
 
 ## Using uv (Preferred)
-uv is a fast Python package manager. Install it first if needed (instructions).
+uv is a fast Python package manager.
 
 uv venv  # Create a virtual environment
+
 .venv\Scripts\activate  # Activate on Windows (or source .venv/bin/activate on Unix)
+
 uv pip install quantum-starter-lab
 
 ## Using pip
+
 python -m venv .venv
+
 .venv\Scripts\activate
+
 pip install quantum-starter-lab
 
 # Development Installation
@@ -46,10 +51,15 @@ pip install quantum-starter-lab
 ## Clone the repo and install in editable mode for contributing:
 
 git clone https://github.com/Pranava-Kumar/quantum-starter-lab.git
+
 cd quantum-starter-lab
+
 uv venv
+
 .venv\Scripts\activate
+
 uv sync --all-extras --dev
+
 uv pip install -e .
 
 Requirements: Python >=3.10, Qiskit, Cirq, Matplotlib, NumPy.
@@ -60,46 +70,66 @@ Requirements: Python >=3.10, Qiskit, Cirq, Matplotlib, NumPy.
 from quantum_starter_lab.api import make_bell
 
 ### Run the Bell state demo
+
 results = make_bell(backend="qiskit.aer", seed=42)
+
 print(results)  # Prints explanation, counts, and probabilities
+
 results.plot()  # Displays circuit and histogram
+
 
 ## Example Usage
 
 Here's a complete script testing multiple functions (save as test_quantum_lab.py and run with uv run python test_quantum_lab.py):
 
 import math
+
 from quantum_starter_lab.api import make_bell, deutsch_jozsa, bernstein_vazirani, grover, teleportation
 
 SEED = 42
+
 BACKEND = "qiskit.aer"
 
 ### Bell state with noise
+
 results_bell = make_bell(backend=BACKEND, noise_name="depolarizing", p=0.05, seed=SEED)
+
 print("Bell Results:", results_bell)
+
 results_bell.plot()  # View plot
 
 ### Deutsch-Jozsa
+
 results_dj = deutsch_jozsa(n_qubits=3, oracle_type="balanced", backend=BACKEND, seed=SEED)
+
 print("DJ Results:", results_dj)
 
 ### Bernstein-Vazirani
+
 results_bv = bernstein_vazirani(n_qubits=4, secret_string="1011", backend=BACKEND, seed=SEED)
+
 print("BV Results:", results_bv)
 
 ### Grover's search
+
 results_grover = grover(n_qubits=3, marked_item="110", backend=BACKEND, seed=SEED)
+
 print("Grover Results:", results_grover)
 
 ### Teleportation
+
 results_tele = teleportation(initial_state_angle=math.pi, backend=BACKEND, seed=SEED)  # Teleport |1>
+
 print("Teleportation Results:", results_tele)
+
 Expected output includes printed results and plots for each demo.
 
 ### For research workflows, export data:
+
 results.export_data("results.json")  # Upcoming feature in v0.2.0
 
 # Setup and Development
+
 Virtual Environment: Use uv or venv as shown in Installation.
 
 Running Tests: After development install, run make test (requires Makefile from repo).
