@@ -9,7 +9,7 @@ name = "quantum-starter-lab"
 version = "0.1.2"
 description = "A beginner-friendly Python layer for running and visualizing introductory quantum demos."
 authors = [
-    { name = "Pranava Kumar", email = "pranavakumar.it@gmail.com" },
+    { name = "Pranava-Kumar", email = "pranavakumar.it@gmail.com" },
 ]
 readme = "README.md"
 license = { text = "Apache-2.0" }

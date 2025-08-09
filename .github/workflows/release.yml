@@ -11,7 +11,8 @@ permissions:
 
 jobs:
   release:
-    runs-on: ubuntu-latest  # Builds on Linux for clean PyPI packages
+    runs-on: ubuntu-latest
+    environment: pypi  # Builds on Linux for clean PyPI packages
 
     steps:
     - uses: actions/checkout@v4  # Checks out your repo code
