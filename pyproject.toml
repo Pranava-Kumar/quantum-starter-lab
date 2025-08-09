@@ -55,7 +55,7 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Pranava-Kumar/quantum-starter-lab" # IMPORTANT: Update with your repo URL
+Homepage = "https://github.com/Pranava-Kumar/quantum-starter-lab" 
 Repository = "https://github.com/Pranava-Kumar/quantum-starter-lab"
 "Bug Tracker" = "https://github.com/Pranava-Kumar/quantum-starter-lab/issues"
 
