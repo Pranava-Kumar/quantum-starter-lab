@@ -1,7 +1,7 @@
 # src/quantum_starter_lab/demos/dj.py
 # The user-facing function for the Deutsch-Jozsa demo.
 
-from typing import Optional
+from typing import List, Optional
 
 from ..explain import get_dj_explanation
 from ..ir.circuit import CircuitIR, Gate
@@ -23,7 +23,7 @@ def deutsch_jozsa(
     Creates and runs the Deutsch-Jozsa algorithm.
     """
     # --- Build the Oracle ---
-    oracle_ops = []
+    oracle_ops: List[Gate] = []
     if oracle_type == "constant":
         # For constant-0: do nothing
         oracle_ops = []

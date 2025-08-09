@@ -2,8 +2,6 @@ qiskit==1.1.1
 qiskit-aer==0.14.1
 matplotlib>=3.8.0
 numpy>=1.26.0
-
-[cirq]
 cirq>=1.4.0
 
 [dev]

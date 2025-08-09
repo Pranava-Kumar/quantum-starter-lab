@@ -1,7 +1,7 @@
 # src/quantum_starter_lab/demos/teleportation.py
 # The user-facing function for the quantum teleportation demo.
 
-from typing import Optional
+from typing import Dict, Optional
 
 from quantum_starter_lab.utils.hist import normalize_counts
 
@@ -85,9 +85,11 @@ def teleportation(
     )
 
     # Simulate classical corrections (since runners don't support conditioned gates)
-    corrected_counts = {}
+    corrected_counts: Dict[str, int] = {}
     for bitstring, count in results.counts.items():
-        m1, m2, bob = bitstring
+        m1 = bitstring
+        m2 = bitstring
+        bob = bitstring
         corrected_bob = bob
         if m2 == "1":
             corrected_bob = "0" if corrected_bob == "1" else "1"  # X correction

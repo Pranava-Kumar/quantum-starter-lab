@@ -17,5 +17,15 @@ class NoiseSpec:
     which helps prevent accidental changes.
     """
 
-    name: NoiseName = "none"
-    p: float = 0.0  # General probability parameter (for bit-flip, depolarizing)
+    def __init__(
+        self,
+        name: Literal[
+            "none", "bit_flip", "depolarizing", "amplitude_damping", "custom"
+        ] = "none",
+        **kwargs,
+    ):
+        self.name: NoiseName = name
+        if name == "custom":
+            self.custom_noise = kwargs
+        else:
+            self.p: float = 0.0

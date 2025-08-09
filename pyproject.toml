@@ -38,6 +38,7 @@ dependencies = [
 ]
 
 # Dependencies for developers (testing, linting, docs)
+[project.optional-dependencies]
 dev = [
     "quantum-starter-lab[cirq]",
     "pytest",
@@ -52,13 +53,15 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Pranava-Kumar/quantum-starter-lab" 
 Repository = "https://github.com/Pranava-Kumar/quantum-starter-lab"
-"Bug Tracker" = "https://github.com/Pranava-Kumar/quantum-starter-lab/issues"
 
 # This section creates the 'qsl' command-line tool. It will now work correctly.
 [project.scripts]
 qsl = "quantum_starter_lab.cli:main"
+
+[tool.mypy]
+ignore_missing_imports = true  # Suppresses import-untyped for third-party libs
+strict = false  # Optional: Start non-strict, enable later
 
 # Configuration for the 'ruff' linter
 [tool.ruff]

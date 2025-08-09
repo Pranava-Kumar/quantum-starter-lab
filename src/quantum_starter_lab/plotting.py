@@ -53,7 +53,7 @@ def create_summary_plot(counts: Dict[str, int], circuit_diagram: str, title: str
     plot_histogram(counts, ax=ax2, title="Measurement Histogram")
 
     fig.suptitle(title, fontsize=16)
-    fig.tight_layout(rect=[0, 0.03, 1, 0.95])  # Adjust layout to make room for suptitle
+    fig.tight_layout(rect=(0, 0.03, 1, 0.95))  # Adjust layout to make room for suptitle
 
     plt.show()  # Display the plot
     return fig

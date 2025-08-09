@@ -1,12 +1,13 @@
 # src/quantum_starter_lab/runners/cirq_runner.py
 # The implementation of a quantum runner using Google's Cirq framework.
 
-from typing import Optional
+from typing import Optional, Union
 
 import cirq
 
+from quantum_starter_lab import results
+
 from ..ir.circuit import CircuitIR
-from ..noise.cirq_noise import apply_cirq_noise
 from ..noise.spec import NoiseSpec
 from ..results import Results
 from ..utils.bitstrings import pad_bitstrings
@@ -40,16 +41,16 @@ class CirqRunner(QuantumRunner):
         cirq_circuit = self._ir_to_cirq_circuit(ir)
 
         # 2. Add noise to the circuit if specified
+        simulator: Union[cirq.Simulator, cirq.DensityMatrixSimulator]
         if noise_spec and noise_spec.name != "none":
-            noisy_circuit = apply_cirq_noise(cirq_circuit, noise_spec)
             simulator = cirq.DensityMatrixSimulator(seed=seed)
-            result = simulator.run(noisy_circuit, repetitions=shots)
         else:
             simulator = cirq.Simulator(seed=seed)
-            result = simulator.run(cirq_circuit, repetitions=shots)
+
+        sim_result = simulator.run(cirq_circuit, repetitions=shots)
 
         # 3. Process the results into our standard format
-        measurements = result.measurements.get(ir.measure_all_key, [])
+        measurements = sim_result.measurements[ir.measure_all_key]
         counts = self._process_cirq_measurements(measurements, ir.n_qubits)
 
         # 4. Pad bitstrings for consistency
@@ -63,7 +64,7 @@ class CirqRunner(QuantumRunner):
             probabilities=probabilities,
             circuit_diagram=cirq_circuit.to_text_diagram(),
             explanation="",  # The explanation is added at a higher level
-            raw_backend_result=result,
+            raw_backend_result=results,
         )
 
     def _ir_to_cirq_circuit(self, ir: CircuitIR) -> cirq.Circuit:

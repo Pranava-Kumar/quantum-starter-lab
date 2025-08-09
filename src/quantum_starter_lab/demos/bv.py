@@ -1,7 +1,7 @@
 # src/quantum_starter_lab/demos/bv.py
 # The user-facing function for the Bernstein-Vazirani demo.
 
-from typing import Optional
+from typing import Dict, Optional
 
 from ..explain import get_bv_explanation
 from ..ir.circuit import CircuitIR, Gate
@@ -54,7 +54,7 @@ def bernstein_vazirani(
     noise_spec = NoiseSpec(name=noise_name, p=p)
     results = run(ir=ir, shots=shots, noise_spec=noise_spec, backend=backend, seed=seed)
 
-    bv_counts = {}
+    bv_counts: Dict[str, int] = {}
     for bitstring, count in results.counts.items():
         data_bits = bitstring[:-1][::-1]  # Reverse for q0 left, ignore ancilla
     if bitstring.endswith("1"):  # BV ancilla should be 1 for secret
