@@ -3,12 +3,12 @@
 
 from typing import Optional
 
-from ..runners import run
+from ..explain import get_bv_explanation
 from ..ir.circuit import CircuitIR, Gate
 from ..noise.spec import NoiseSpec
-from ..explain import get_bv_explanation
+from ..runners import run
 from ..utils.rng import create_rng
-
+from ..results import Results
 
 def bernstein_vazirani(
     n_qubits: int,

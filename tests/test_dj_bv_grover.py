@@ -1,7 +1,8 @@
 # tests/test_dj_bv_grover.py
 
 import pytest
-from quantum_starter_lab.api import deutsch_jozsa, bernstein_vazirani, grover
+
+from quantum_starter_lab.api import bernstein_vazirani, deutsch_jozsa, grover
 
 
 @pytest.mark.parametrize("n_qubits", [2, 3])
@@ -36,7 +37,8 @@ def test_bv_finds_secret_string(backend):
         n_qubits=n_qubits, secret_string=secret, backend=backend, seed=42
     )
 
-    # The measurement result should be the secret string itself with very high probability
+    # The measurement result should be the secret string itself with
+    # very high probability
     assert results.probabilities[secret] == pytest.approx(1.0, abs=0.05)
 
 

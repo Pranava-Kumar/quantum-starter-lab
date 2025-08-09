@@ -2,6 +2,7 @@
 # Translates a generic NoiseSpec into a noisy Cirq circuit.
 
 import cirq
+
 from .spec import NoiseSpec
 
 

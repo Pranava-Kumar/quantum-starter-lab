@@ -2,15 +2,16 @@
 # The implementation of a quantum runner using Google's Cirq framework.
 
 from typing import Optional
+
 import cirq
 
-from .base import QuantumRunner
-from ..results import Results
-from ..noise.spec import NoiseSpec
-from ..noise.cirq_noise import apply_cirq_noise
 from ..ir.circuit import CircuitIR
-from ..utils.hist import normalize_counts
+from ..noise.cirq_noise import apply_cirq_noise
+from ..noise.spec import NoiseSpec
+from ..results import Results
 from ..utils.bitstrings import pad_bitstrings
+from ..utils.hist import normalize_counts
+from .base import QuantumRunner
 
 
 class CirqRunner(QuantumRunner):

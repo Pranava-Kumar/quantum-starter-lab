@@ -2,6 +2,7 @@
 # Helper for creating a reproducible random number generator.
 
 from typing import Optional
+
 import numpy as np
 
 

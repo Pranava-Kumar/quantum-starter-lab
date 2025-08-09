@@ -4,11 +4,11 @@
 
 from typing import Optional
 
-from .qiskit_runner import QiskitRunner
-from .cirq_runner import CirqRunner
 from ..ir.circuit import CircuitIR
 from ..noise.spec import NoiseSpec
 from ..results import Results
+from .cirq_runner import CirqRunner
+from .qiskit_runner import QiskitRunner
 
 # A dictionary that maps backend names to their runner classes.
 # This makes it easy to add new backends in the future!

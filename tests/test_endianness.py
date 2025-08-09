@@ -1,6 +1,7 @@
 # tests/test_endianness.py
 
 import pytest
+
 from quantum_starter_lab.ir import CircuitIR, Gate
 from quantum_starter_lab.runners import run
 

@@ -38,6 +38,9 @@ def get_grover_explanation(n_qubits: int, noise_info: str = "") -> str:
 def get_teleportation_explanation(noise_info: str = "") -> str:
     """Returns the explanation for the quantum teleportation demo."""
     return (
-        "Quantum teleportation allows one qubit to be sent to another via entanglement. "
-        "In this demo, a qubit is teleported from Alice to Bob."
+        "Quantum teleportation allows one qubit to be sent to another "
+        "via entanglement. In this demo, a qubit is teleported from "
+        "Alice to Bob. The teleportation protocol uses entanglement "
+        "and classical communication to transfer the state of a qubit "
+        "from one location to another."
     )

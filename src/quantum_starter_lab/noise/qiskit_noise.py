@@ -4,9 +4,9 @@
 # IMPORTANT: Updated imports for modern Qiskit Aer
 from qiskit_aer.noise import (
     NoiseModel,
-    pauli_error,
-    depolarizing_error,
     amplitude_damping_error,
+    depolarizing_error,
+    pauli_error,
 )
 
 from .spec import NoiseSpec

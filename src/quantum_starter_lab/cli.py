@@ -2,12 +2,9 @@
 # Simple CLI for running quantum demos from the terminal.
 
 import argparse
+
 from .demos import (
     bell,
-    dj,
-    bv,
-    grover,
-    teleportation,
 )  # Import demo functions (add these later)
 
 

@@ -6,8 +6,8 @@ __version__ = "0.1.0"  # Starting version; update this for releases
 # Import main demo functions so users can access them directly
 # (We'll add these in demos/ files later)
 from .demos.bell import make_bell
-from .demos.dj import deutsch_jozsa
 from .demos.bv import bernstein_vazirani
+from .demos.dj import deutsch_jozsa
 from .demos.grover import grover
 from .demos.teleportation import teleportation
 

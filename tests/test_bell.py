@@ -1,6 +1,7 @@
 # tests/test_bell.py
 
 import pytest
+
 from quantum_starter_lab.api import make_bell
 
 
@@ -24,7 +25,7 @@ def test_bell_noisy_run(backend):
     """Tests that applying noise affects the results and fidelity."""
     # Run with a significant amount of noise
     noisy_results = make_bell(backend=backend, noise_name="bit_flip", p=0.1, seed=42)
-    ideal_results = make_bell(backend=backend, noise_name="none", seed=42)
+    make_bell(backend=backend, noise_name="none", seed=42)
 
     # The fidelity of the noisy run should be less than the ideal one (which is 1.0)
     # We need to calculate fidelity first. For now, let's just check for extra counts.

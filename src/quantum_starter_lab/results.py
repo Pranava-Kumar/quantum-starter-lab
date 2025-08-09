@@ -45,7 +45,7 @@ class Results:
 
     def __str__(self) -> str:
         """Provides a simple text summary when printing the object."""
-        output = f"--- Quantum Starter Lab Results ---\n"
+        output = "--- Quantum Starter Lab Results ---\n"
         output += f"Explanation: {self.explanation}\n"
         output += f"Counts: {self.counts}\n"
         if self.fidelity is not None:

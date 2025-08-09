@@ -3,11 +3,11 @@
 
 from typing import Optional
 
-from ..runners import run
+from ..explain import get_dj_explanation
 from ..ir.circuit import CircuitIR, Gate
 from ..noise.spec import NoiseSpec
-from ..explain import get_dj_explanation
-
+from ..runners import run
+from ..results import Results
 
 def deutsch_jozsa(
     n_qubits: int,

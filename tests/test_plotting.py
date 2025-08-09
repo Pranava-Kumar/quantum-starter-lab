@@ -1,10 +1,11 @@
 # tests/test_plotting.py
 
 from unittest.mock import patch
-import pytest
+
 import matplotlib.figure
-from quantum_starter_lab.plotting import create_summary_plot
+
 from quantum_starter_lab.api import make_bell
+from quantum_starter_lab.plotting import create_summary_plot
 
 
 @patch("matplotlib.pyplot.show")
@@ -21,7 +22,8 @@ def test_create_summary_plot_runs_without_error(mock_show):
     # Assert that a Matplotlib Figure object was returned
     assert isinstance(fig, matplotlib.figure.Figure)
 
-    # Assert that our mocked (fake) plt.show() was called, meaning the function finished.
+    # Assert that our mocked (fake) plt.show() was called, meaning
+    # the function finished.
     mock_show.assert_called_once()
 
 

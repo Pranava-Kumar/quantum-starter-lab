@@ -2,12 +2,13 @@
 # Defines the abstract base class (the "blueprint") for all quantum runners.
 
 from abc import ABC, abstractmethod
-from typing import Any, Optional
+from typing import Optional
+
+from ..ir.circuit import CircuitIR
+from ..noise.spec import NoiseSpec
 
 # We will define these in other files, but import them here for type hints
 from ..results import Results
-from ..noise.spec import NoiseSpec
-from ..ir.circuit import CircuitIR
 
 
 class QuantumRunner(ABC):

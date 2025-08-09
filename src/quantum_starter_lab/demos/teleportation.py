@@ -3,11 +3,10 @@
 
 from typing import Optional
 
-from ..runners import run
 from ..ir.circuit import CircuitIR, Gate
 from ..noise.spec import NoiseSpec
 from ..results import Results
-
+from ..runners import run
 
 def teleportation(
     initial_state_angle: float = 0.0,  # Angle to prepare the state to be teleported
@@ -20,10 +19,12 @@ def teleportation(
     """
     Creates and runs the quantum teleportation protocol.
 
-    This circuit teleports the state of qubit 0 ("Alice's message") to qubit 2 ("Bob's qubit").
+    This circuit teleports the state of qubit 0 ("Alice's message") to
+    qubit 2 ("Bob's qubit").
 
     Args:
-        initial_state_angle: An angle (in radians) for a U gate to create the initial state.
+        initial_state_angle: An angle (in radians) for a U gate to create
+        the initial state.
         shots: The number of simulation shots.
         noise_name: The name of the noise model.
         p: The noise probability.
@@ -31,7 +32,8 @@ def teleportation(
         seed: An optional seed for reproducibility.
 
     Returns:
-        A Results object. Bob's qubit (the rightmost one) should be in the initial state.
+        A Results object. Bob's qubit (the rightmost one) should be in
+        the initial state.
     """
     # The circuit needs 3 qubits:
     # q0: The message state to be teleported (Alice)
@@ -53,9 +55,11 @@ def teleportation(
             # 3. Alice interacts her message qubit (q0) with her half of the pair (q1).
             Gate(name="cnot", qubits=[0, 1]),
             Gate(name="h", qubits=[0]),
-            # 4. Alice measures her two qubits (q0, q1) and sends the classical results to Bob.
+            # 4. Alice measures her two qubits (q0, q1) and sends the classical
+            # results to Bob.
             # (The measurement is implicitly at the end in our IR).
-            # 5. Bob applies corrections to his qubit (q2) based on Alice's classical bits.
+            # 5. Bob applies corrections to his qubit (q2) based on Alice's
+            # classical bits.
             # Our IR will need to support classically controlled operations for this.
             Gate(
                 name="x", qubits=[2], classical_control_bit=1
@@ -70,8 +74,11 @@ def teleportation(
     results = run(ir=ir, shots=shots, noise_spec=noise_spec, backend=backend, seed=seed)
 
     results.explanation = (
-        "Quantum Teleportation: The state of the first qubit was 'teleported' to the third qubit. "
-        "The measurement of the third qubit should match the initial state prepared on the first."
+        "Quantum Teleportation: The state of the first qubit was "
+        "'teleported' to the third qubit. The measurement of the third "
+        "qubit should match the initial state prepared on the first. "
+        "This demonstrates the power of quantum entanglement and "
+        "quantum teleportation."
     )
 
     return results

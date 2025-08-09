@@ -1,8 +1,8 @@
 Metadata-Version: 2.4
 Name: quantum-starter-lab
-Version: 0.1.0
+Version: 0.1.2
 Summary: A beginner-friendly Python layer for running and visualizing introductory quantum demos.
-Author-email: Pranava Kumar <pranavakumar.it@gmail.com>
+Author-email: Pranava-Kumar <pranavakumar.it@gmail.com>
 License: Apache-2.0
 Project-URL: Homepage, https://github.com/Pranava-Kumar/quantum-starter-lab
 Project-URL: Repository, https://github.com/Pranava-Kumar/quantum-starter-lab

@@ -1,6 +1,5 @@
 # tests/test_noise.py
 
-import pytest
 from quantum_starter_lab.api import make_bell
 from quantum_starter_lab.noise import NoiseSpec
 

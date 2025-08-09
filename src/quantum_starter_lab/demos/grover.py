@@ -4,11 +4,11 @@
 import math
 from typing import Optional
 
-from ..runners import run
+from ..explain import get_grover_explanation
 from ..ir.circuit import CircuitIR, Gate
 from ..noise.spec import NoiseSpec
-from ..explain import get_grover_explanation
-
+from ..runners import run
+from ..results import Results
 
 def grover(
     n_qubits: int,
