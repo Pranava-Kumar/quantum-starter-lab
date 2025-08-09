@@ -8,8 +8,7 @@ from quantum_starter_lab.api import teleportation
 
 
 def test_teleport_a_one_state(backend):
-    """
-    Tests that we can successfully teleport a |1> state.
+    """Tests that we can successfully teleport a |1> state.
 
     We prepare the message qubit in the |1> state and then check if the
     receiver's qubit (the last one) is also in the |1> state after the protocol.

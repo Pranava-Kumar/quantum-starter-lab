@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling >=1.0.0"]
+requires = ["hatchling >=1.0.0", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
@@ -35,14 +35,6 @@ dependencies = [
     "qiskit-aer >=0.14.0,<1.0.0",
     "matplotlib >=3.8.0,<4.0.0",
     "cirq >=1.3.0,<2.0.0",  # Adjusted for broader compatibility; change if needed
-    "pyqt5 >=5.15.0,<6.0.0",  # Added for interactive plotting backend
-]
-
-[project.optional-dependencies]
-# Extras for optional features (e.g., advanced plotting or hardware integration)
-extras = [
-    "pyqt5 >=5.15.0",  # Already in core, but can be used for optional GUI enhancements
-    "qiskit-ibm-provider >=0.7.0",  # For real IBM Quantum hardware access
 ]
 
 # Dependencies for developers (testing, linting, typing, docs)
@@ -61,10 +53,8 @@ dev = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/Pranava-Kumar/quantum-starter-lab"
 "Repository" = "https://github.com/Pranava-Kumar/quantum-starter-lab"
 "Documentation" = "https://pranava-kumar.github.io/quantum-starter-lab"  # Update if you host docs
-"Bug Tracker" = "https://github.com/Pranava-Kumar/quantum-starter-lab/issues"
 "Changelog" = "https://github.com/Pranava-Kumar/quantum-starter-lab/blob/main/RELEASE_NOTES.md"
 
 # CLI entrypoint for the 'qsl' command
@@ -93,14 +83,10 @@ target-version = "py310"
 select = [
     "E", "F", "W",  # Standard Python errors/warnings
     "I",           # Import sorting
-    "D",           # Pydocstyle for documentation
     "UP",          # Pyupgrade for modern Python
     "B",           # Bugbear for common pitfalls
 ]
 ignore = ["E501"]  # Optional: Ignore line length if you prefer flexibility
-
-[tool.ruff.lint.pydocstyle]
-convention = "google"  # Use Google-style docstrings
 
 # Pytest configuration (optional, if using pytest.ini separately)
 [tool.pytest.ini_options]

@@ -1,14 +1,12 @@
 # src/quantum_starter_lab/utils/rng.py
 # Helper for creating a reproducible random number generator.
 
-from typing import Optional
 
 import numpy as np
 
 
-def create_rng(seed: Optional[int] = None) -> np.random.Generator:
-    """
-    Creates a NumPy random number generator instance.
+def create_rng(seed: int | None = None) -> np.random.Generator:
+    """Creates a NumPy random number generator instance.
 
     This is used throughout the package to ensure that any random
     processes (like sampling noise or generating random circuits) can
@@ -20,5 +18,6 @@ def create_rng(seed: Optional[int] = None) -> np.random.Generator:
 
     Returns:
         A NumPy random number generator instance.
+
     """
     return np.random.default_rng(seed)

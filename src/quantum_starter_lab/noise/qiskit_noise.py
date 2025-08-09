@@ -13,14 +13,14 @@ from .spec import NoiseSpec
 
 
 def apply_qiskit_noise(spec: NoiseSpec) -> NoiseModel:
-    """
-    Builds a Qiskit NoiseModel based on the provided specification.
+    """Builds a Qiskit NoiseModel based on the provided specification.
 
     Args:
         spec: The generic noise specification.
 
     Returns:
         A Qiskit NoiseModel object ready to be used by the Aer simulator.
+
     """
     noise_model = NoiseModel()
 

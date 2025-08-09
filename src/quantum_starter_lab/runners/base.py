@@ -2,7 +2,6 @@
 # Defines the abstract base class (the "blueprint") for all quantum runners.
 
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from ..ir.circuit import CircuitIR
 from ..noise.spec import NoiseSpec
@@ -12,8 +11,7 @@ from ..results import Results
 
 
 class QuantumRunner(ABC):
-    """
-    Abstract base class for a quantum circuit runner.
+    """Abstract base class for a quantum circuit runner.
 
     This class defines the standard interface that all runners (e.g., for
     Qiskit, Cirq) must implement. This ensures they can be used interchangeably.
@@ -24,11 +22,10 @@ class QuantumRunner(ABC):
         self,
         ir: CircuitIR,
         shots: int,
-        noise_spec: Optional[NoiseSpec] = None,
-        seed: Optional[int] = None,
+        noise_spec: NoiseSpec | None = None,
+        seed: int | None = None,
     ) -> Results:
-        """
-        Executes a quantum circuit and returns the results.
+        """Executes a quantum circuit and returns the results.
 
         Args:
             ir: The intermediate representation (IR) of the circuit to run.
@@ -38,5 +35,6 @@ class QuantumRunner(ABC):
 
         Returns:
             A Results object containing the outcome of the simulation.
+
         """
         pass

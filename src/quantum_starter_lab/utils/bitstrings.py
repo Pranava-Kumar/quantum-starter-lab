@@ -1,12 +1,9 @@
 # src/quantum_starter_lab/utils/bitstrings.py
 # Helper functions for working with binary strings (bitstrings).
 
-from typing import Dict
 
-
-def pad_bitstrings(counts: Dict[str, int], n_qubits: int) -> Dict[str, int]:
-    """
-    Ensures all bitstring keys in a counts dictionary have the same length.
+def pad_bitstrings(counts: dict[str, int], n_qubits: int) -> dict[str, int]:
+    """Ensures all bitstring keys in a counts dictionary have the same length.
 
     Some quantum simulators drop leading zeros (e.g., returning '1' instead
     of '01' for a 2-qubit system). This function pads them back to ensure
@@ -18,6 +15,7 @@ def pad_bitstrings(counts: Dict[str, int], n_qubits: int) -> Dict[str, int]:
 
     Returns:
         A new dictionary with all keys padded, e.g., {'01': 512, '10': 488}.
+
     """
     padded_counts = {}
     for bitstring, count in counts.items():

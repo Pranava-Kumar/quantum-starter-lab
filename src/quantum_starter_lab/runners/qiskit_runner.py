@@ -1,7 +1,6 @@
 # src/quantum_starter_lab/runners/qiskit_runner.py
 # The implementation of a quantum runner using IBM's Qiskit framework.
 
-from typing import Optional
 
 import qiskit
 from qiskit_aer import Aer
@@ -21,12 +20,10 @@ class QiskitRunner(QuantumRunner):
         self,
         ir: CircuitIR,
         shots: int,
-        noise_spec: Optional[NoiseSpec] = None,
-        seed: Optional[int] = None,
+        noise_spec: NoiseSpec | None = None,
+        seed: int | None = None,
     ) -> Results:
-        """
-        Runs the given circuit IR on Qiskit's Aer simulator.
-        """
+        """Runs the given circuit IR on Qiskit's Aer simulator."""
         # 1. Translate our IR to a Qiskit QuantumCircuit
         qiskit_circuit = self._ir_to_qiskit_circuit(ir)
 

@@ -1,7 +1,6 @@
 # src/quantum_starter_lab/demos/bell.py
 # The user-facing function for the Bell state demo.
 
-from typing import Optional
 
 from ..explain import get_bell_explanation
 from ..ir.circuit import CircuitIR, Gate
@@ -15,10 +14,9 @@ def make_bell(
     noise_name: str = "none",
     p: float = 0.0,
     backend: str = "qiskit.aer",
-    seed: Optional[int] = None,
+    seed: int | None = None,
 ) -> "Results":
-    """
-    Creates and runs the Bell state circuit, a simple example of entanglement.
+    """Creates and runs the Bell state circuit, a simple example of entanglement.
 
     Args:
         shots: The number of times to run the simulation.
@@ -29,6 +27,7 @@ def make_bell(
 
     Returns:
         A Results object containing the counts, diagram, and explanation.
+
     """
     # 1. Define the circuit using our generic Intermediate Representation (IR).
     # This describes the circuit in a framework-agnostic way.

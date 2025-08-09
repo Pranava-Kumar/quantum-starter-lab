@@ -1,7 +1,6 @@
 # src/quantum_starter_lab/runners/cirq_runner.py
 # The implementation of a quantum runner using Google's Cirq framework.
 
-from typing import Optional, Union
 
 import cirq
 
@@ -22,11 +21,10 @@ class CirqRunner(QuantumRunner):
         self,
         ir: CircuitIR,
         shots: int,
-        noise_spec: Optional[NoiseSpec] = None,
-        seed: Optional[int] = None,
+        noise_spec: NoiseSpec | None = None,
+        seed: int | None = None,
     ) -> Results:
-        """
-        Runs the given circuit IR on Cirq's simulator.
+        """Runs the given circuit IR on Cirq's simulator.
 
         Args:
             ir: The intermediate representation of the circuit.
@@ -36,12 +34,13 @@ class CirqRunner(QuantumRunner):
 
         Returns:
             A Results object with the simulation outcome.
+
         """
         # 1. Convert our IR to a Cirq circuit
         cirq_circuit = self._ir_to_cirq_circuit(ir)
 
         # 2. Add noise to the circuit if specified
-        simulator: Union[cirq.Simulator, cirq.DensityMatrixSimulator]
+        simulator: cirq.Simulator | cirq.DensityMatrixSimulator
         if noise_spec and noise_spec.name != "none":
             simulator = cirq.DensityMatrixSimulator(seed=seed)
         else:

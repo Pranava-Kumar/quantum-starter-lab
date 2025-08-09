@@ -7,8 +7,7 @@ from quantum_starter_lab.runners import run
 
 
 def test_endianness_consistency_across_backends(backend):
-    """
-    Tests that both Qiskit and Cirq runners produce the same bitstring representation.
+    """Tests that both Qiskit and Cirq runners produce the same bitstring representation.
 
     Different frameworks use different conventions for qubit ordering (endianness).
     This test creates a non-symmetrical state |10> (q0=1, q1=0) and asserts

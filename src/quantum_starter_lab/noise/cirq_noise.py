@@ -7,8 +7,7 @@ from .spec import NoiseSpec
 
 
 def apply_cirq_noise(circuit: cirq.Circuit, spec: NoiseSpec) -> cirq.Circuit:
-    """
-    Applies noise to a Cirq circuit based on the provided specification.
+    """Applies noise to a Cirq circuit based on the provided specification.
 
     Args:
         circuit: The ideal (noiseless) Cirq circuit.
@@ -16,6 +15,7 @@ def apply_cirq_noise(circuit: cirq.Circuit, spec: NoiseSpec) -> cirq.Circuit:
 
     Returns:
         A new Cirq circuit with noise channels inserted after each operation.
+
     """
     if spec.name == "bit_flip":
         noisy_circuit = circuit.with_noise(cirq.bit_flip(p=spec.p))

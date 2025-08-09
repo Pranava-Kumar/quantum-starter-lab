@@ -1,16 +1,15 @@
 # src/quantum_starter_lab/plotting.py
 # Helper functions for creating visualizations.
 
-from typing import Dict
 
 import matplotlib
 
-matplotlib.use("Qt5Agg")  # Non-interactive (file-only) backend for tests
+matplotlib.use("TkAgg")  # Non-interactive (file-only) backend for tests
 import matplotlib.pyplot as plt
 
 
 def plot_histogram(
-    counts: Dict[str, int], ax=None, title: str = "Measurement Outcomes"
+    counts: dict[str, int], ax=None, title: str = "Measurement Outcomes"
 ):
     """Creates a bar chart histogram from measurement counts."""
     if ax is None:
@@ -28,10 +27,8 @@ def plot_histogram(
     return ax.figure, ax
 
 
-def create_summary_plot(counts: Dict[str, int], circuit_diagram: str, title: str):
-    """
-    Creates a single figure with the circuit diagram and a histogram.
-    """
+def create_summary_plot(counts: dict[str, int], circuit_diagram: str, title: str):
+    """Creates a single figure with the circuit diagram and a histogram."""
     fig = plt.figure(figsize=(12, 6))
 
     # Subplot 1: Circuit Diagram (as text)

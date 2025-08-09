@@ -5,8 +5,7 @@ from .circuit import CircuitIR
 
 
 def draw_circuit_ascii(ir: CircuitIR) -> str:
-    """
-    Generates a simple, single-string ASCII art diagram of the circuit.
+    """Generates a simple, single-string ASCII art diagram of the circuit.
 
     This is a basic implementation for pedagogical purposes.
     """

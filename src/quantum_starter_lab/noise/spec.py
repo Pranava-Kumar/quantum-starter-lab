@@ -9,8 +9,7 @@ NoiseName = Literal["none", "bit_flip", "depolarizing", "amplitude_damping"]
 
 @dataclasses.dataclass(frozen=True)
 class NoiseSpec:
-    """
-    A simple, immutable container for describing a noise model.
+    """A simple, immutable container for describing a noise model.
 
     This object is passed to the runners to specify which noise to apply.
     The `frozen=True` argument makes instances of this class immutable,

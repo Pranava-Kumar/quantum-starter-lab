@@ -2,7 +2,7 @@
 # Defines the custom container for holding and displaying demo results.
 
 import dataclasses
-from typing import Any, Dict, Optional
+from typing import Any
 
 # We will import these from our other files later
 from .plotting import create_summary_plot
@@ -10,24 +10,22 @@ from .plotting import create_summary_plot
 
 @dataclasses.dataclass
 class Results:
-    """
-    A container for the results of a quantum demo.
+    """A container for the results of a quantum demo.
 
     Holds all the information from a run, including counts, diagrams,
     and explanations, and provides a simple .plot() method to visualize them.
     """
 
-    counts: Dict[str, int]
-    probabilities: Dict[str, float]
+    counts: dict[str, int]
+    probabilities: dict[str, float]
     circuit_diagram: str
     explanation: str
     raw_backend_result: Any
-    fidelity: Optional[float] = None
-    matplotlib_figure: Optional[Any] = None
+    fidelity: float | None = None
+    matplotlib_figure: Any | None = None
 
     def plot(self):
-        """
-        Generates and displays a summary plot of the results.
+        """Generates and displays a summary plot of the results.
 
         The plot includes the circuit diagram and a histogram of the counts.
         """

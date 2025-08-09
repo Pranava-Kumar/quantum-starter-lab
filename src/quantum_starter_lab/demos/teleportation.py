@@ -1,7 +1,6 @@
 # src/quantum_starter_lab/demos/teleportation.py
 # The user-facing function for the quantum teleportation demo.
 
-from typing import Dict, Optional
 
 from quantum_starter_lab.utils.hist import normalize_counts
 
@@ -17,10 +16,9 @@ def teleportation(
     noise_name: str = "none",
     p: float = 0.0,
     backend: str = "qiskit.aer",
-    seed: Optional[int] = None,
+    seed: int | None = None,
 ) -> "Results":
-    """
-    Creates and runs the quantum teleportation protocol.
+    """Creates and runs the quantum teleportation protocol.
 
     This circuit teleports the state of qubit 0 ("Alice's message") to
     qubit 2 ("Bob's qubit").
@@ -37,6 +35,7 @@ def teleportation(
     Returns:
         A Results object. Bob's qubit (the rightmost one) should be in
         the initial state.
+
     """
     # The circuit needs 3 qubits:
     # q0: The message state to be teleported (Alice)
@@ -85,7 +84,7 @@ def teleportation(
     )
 
     # Simulate classical corrections (since runners don't support conditioned gates)
-    corrected_counts: Dict[str, int] = {}
+    corrected_counts: dict[str, int] = {}
     for bitstring, count in results.counts.items():
         m1 = bitstring
         m2 = bitstring

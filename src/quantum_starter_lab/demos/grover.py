@@ -2,7 +2,6 @@
 # The user-facing function for the Grover's search algorithm demo.
 
 import math
-from typing import Optional
 
 from ..explain import get_grover_explanation
 from ..ir.circuit import CircuitIR, Gate
@@ -18,10 +17,9 @@ def grover(
     noise_name: str = "none",
     p: float = 0.0,
     backend: str = "qiskit.aer",
-    seed: Optional[int] = None,
+    seed: int | None = None,
 ) -> "Results":
-    """
-    Creates and runs Grover's search algorithm to find a marked item.
+    """Creates and runs Grover's search algorithm to find a marked item.
 
     Args:
         n_qubits: The number of qubits to search in (database size is 2**n_qubits).
@@ -34,6 +32,7 @@ def grover(
 
     Returns:
         A Results object with the outcome of the search.
+
     """
     # --- 1. Build the Oracle ---
     # The oracle "marks" the item we're searching for by flipping its phase.

@@ -2,8 +2,6 @@
 # The main entry point for the runners module. It provides a simple `run`
 # function that automatically dispatches to the correct backend runner.
 
-from typing import Optional
-
 from ..ir.circuit import CircuitIR
 from ..noise.spec import NoiseSpec
 from ..results import Results
@@ -22,11 +20,10 @@ def run(
     ir: CircuitIR,
     shots: int,
     backend: str = "qiskit.aer",
-    noise_spec: Optional[NoiseSpec] = None,
-    seed: Optional[int] = None,
+    noise_spec: NoiseSpec | None = None,
+    seed: int | None = None,
 ) -> Results:
-    """
-    A high-level function to run a circuit on a specified backend.
+    """A high-level function to run a circuit on a specified backend.
 
     This function looks up the correct runner based on the `backend` string,
     instantiates it, and executes the circuit.
@@ -43,6 +40,7 @@ def run(
 
     Raises:
         ValueError: If the requested backend is not supported.
+
     """
     runner_class = RUNNER_MAP.get(backend)
 

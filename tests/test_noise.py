@@ -12,9 +12,7 @@ def test_noise_spec_creation():
 
 
 def test_noise_is_applied(backend):
-    """
-    Compares a noisy run to an ideal run to ensure noise has an effect.
-    """
+    """Compares a noisy run to an ideal run to ensure noise has an effect."""
     ideal_results = make_bell(backend=backend, seed=42)
     noisy_results = make_bell(backend=backend, noise_name="bit_flip", p=0.1, seed=42)
 

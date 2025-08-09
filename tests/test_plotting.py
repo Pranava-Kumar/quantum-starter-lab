@@ -10,8 +10,7 @@ from quantum_starter_lab.plotting import create_summary_plot
 
 @patch("matplotlib.pyplot.show")
 def test_create_summary_plot_runs_without_error(mock_show):
-    """
-    Tests that the main plotting function runs without crashing and returns a Figure.
+    """Tests that the main plotting function runs without crashing and returns a Figure.
     The @patch decorator replaces plt.show() with a mock so no window appears.
     """
     dummy_counts = {"00": 50, "11": 50}
