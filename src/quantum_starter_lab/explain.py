@@ -49,3 +49,17 @@ def get_teleportation_explanation(noise_info: str = "") -> str:
         "and classical communication to transfer the state of a qubit "
         "from one location to another."
     )
+
+
+def get_qft_explanation(noise_info: str = "") -> str:
+    """Returns the explanation for the Quantum Fourier Transform (QFT) demo."""
+    base_explanation = (
+        "The Quantum Fourier Transform (QFT) is a fundamental algorithm "
+        "in quantum computing. It transforms a quantum state into its "
+        "frequency domain representation. The QFT is a key component "
+        "in many quantum algorithms, including Shor's algorithm for "
+        "factoring and quantum phase estimation."
+    )
+    if noise_info:
+        return f"{base_explanation} {noise_info}"
+    return base_explanation

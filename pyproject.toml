@@ -91,7 +91,7 @@ ignore = ["E501"]  # Optional: Ignore line length if you prefer flexibility
 
 # Pytest configuration (optional, if using pytest.ini separately)
 [tool.pytest.ini_options]
-addopts = "-v --hypothesis-show-statistics"
+addopts = "-v"
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
 ]

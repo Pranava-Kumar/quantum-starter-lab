@@ -7,6 +7,7 @@ from .demos.bell import make_bell
 from .demos.bv import bernstein_vazirani
 from .demos.dj import deutsch_jozsa
 from .demos.grover import grover
+from .demos.qft import make_qft
 from .demos.teleportation import teleportation
 from .results import Results
 from .runners import run
@@ -16,6 +17,7 @@ __all__ = [
     "deutsch_jozsa",
     "bernstein_vazirani",
     "grover",
+    "make_qft",
     "teleportation",
     "Results",
     "run",
